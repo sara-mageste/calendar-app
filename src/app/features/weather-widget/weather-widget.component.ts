@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeatherService } from '../../core/services/weather.service';
+import { WeatherData } from '../../core/models/weather.model';
 
 @Component({
   selector: 'app-weather-widget',
@@ -10,8 +10,23 @@ import { WeatherService } from '../../core/services/weather.service';
   styleUrl: './weather-widget.component.css'
 })
 export class WeatherWidgetComponent {
-  private readonly weatherService = inject(WeatherService);
+  readonly isExpanded = signal<boolean>(false);
+  readonly weatherData = signal<WeatherData>({
+    city: 'São Paulo',
+    temperature: 21,
+    condition: 'Ensolarado',
+    icon: '☀️',
+    hourly: [
+      { time: '6:00 AM', temp: 25, icon: '🌩️' },
+      { time: '9:00 AM', temp: 28, icon: '⛅' },
+      { time: '12:00 PM', temp: 33, icon: '☀️' },
+      { time: '3:00 PM', temp: 34, icon: '☀️' },
+      { time: '6:00 PM', temp: 32, icon: '☀️' },
+      { time: '9:00 PM', temp: 30, icon: '⛅' }
+    ]
+  });
 
-  readonly currentWeather = this.weatherService.currentWeather;
-  readonly hourlyForecast = this.weatherService.hourlyForecast;
+  toggleForecast(): void {
+    this.isExpanded.update(value => !value);
+  }
 }

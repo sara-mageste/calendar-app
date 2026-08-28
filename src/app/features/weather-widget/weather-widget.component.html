@@ -1,27 +1,22 @@
-<div class="weather-widget-container" *ngIf="currentWeather() as weather">
-  <div class="current-weather-section">
-    <div class="weather-main-info">
-      <span class="city-name">{{ weather.city }}</span>
-      <div class="temp-display">
-        <span class="weather-icon">{{ weather.icon }}</span>
-        <span class="temp-value">{{ weather.temperature }}°C</span>
-      </div>
-      <span class="weather-condition">{{ weather.condition }}</span>
-    </div>
-    <div class="weather-details">
-      <span>Max: {{ weather.high }}° | Min: {{ weather.low }}°</span>
-      <span>Umidade: {{ weather.humidity }}%</span>
-      <span>Vento: {{ weather.windSpeed }} km/h</span>
-    </div>
-  </div>
+<div class="weather-container">
+  <button class="weather-summary-pill neumorphic-btn" (click)="toggleForecast()" [class.active]="isExpanded()"
+    aria-label="Toggle weather forecast">
 
-  <div class="hourly-forecast-section">
-    <h3>Previsão para 24 Horas</h3>
-    <div class="hourly-scroll">
-      <div *ngFor="let hour of hourlyForecast()" class="hourly-card">
-        <span class="hour-time">{{ hour.time }}</span>
-        <span class="hour-icon">{{ hour.icon }}</span>
-        <span class="hour-temp">{{ hour.temp }}°C</span>
+    <div class="weather-icon">{{ weatherData().icon }}</div>
+    <div class="weather-temp">{{ weatherData().temperature }}°</div>
+    <div class="weather-details">
+      <span class="condition">{{ weatherData().condition }}</span>
+      <span class="city">{{ weatherData().city }}</span>
+    </div>
+  </button>
+
+  <div class="forecast-panel neumorphic-card" *ngIf="isExpanded()">
+    <div class="forecast-header">TODAY'S FORECAST</div>
+    <div class="forecast-list">
+      <div class="forecast-item" *ngFor="let item of weatherData().hourly">
+        <span class="forecast-time">{{ item.time }}</span>
+        <span class="forecast-icon">{{ item.icon }}</span>
+        <span class="forecast-temp">{{ item.temp }}°</span>
       </div>
     </div>
   </div>

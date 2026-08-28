@@ -14,6 +14,7 @@
   justify-content: flex-start;
   width: 320px;
   flex-shrink: 0;
+  gap: 24px;
 }
 
 .main-content {
@@ -21,4 +22,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.weather-wrapper {
+  margin-left: 35px;
 }
