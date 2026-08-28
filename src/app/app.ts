@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { ClockComponent } from './features/clock/clock.component';
 import { WeatherWidgetComponent } from './features/weather-widget/weather-widget.component';
 import { CommonModule } from '@angular/common';
+import { SeasonComponent } from "./features/season/season.component";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ClockComponent,
     WeatherWidgetComponent,
+    SeasonComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

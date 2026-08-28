@@ -1,5 +1,5 @@
 <div class="weather-container">
-  <!-- Pílula Resumida (Sob o Relógio) -->
+
   <button class="weather-summary-pill neumorphic-btn" (click)="toggleForecast()" [class.active]="isOpen()"
     aria-label="Toggle weather forecast">
 
@@ -21,7 +21,6 @@
     </div>
   </button>
 
-  <!-- Painel de Previsão 24h (Expansível ao Lado) -->
   <div class="forecast-panel neumorphic-card" *ngIf="isOpen()" [class.fade-out]="isClosing()">
 
     <div class="forecast-header">TODAY'S FORECAST (24H)</div>
