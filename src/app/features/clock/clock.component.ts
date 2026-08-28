@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { timer } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-clock',
@@ -8,35 +10,57 @@ import { CommonModule } from '@angular/common';
   templateUrl: './clock.component.html',
   styleUrl: './clock.component.css'
 })
-export class ClockComponent implements OnInit, OnDestroy {
-  readonly currentTime = signal<Date>(new Date());
-  readonly secondHandDeg = signal<number>(0);
-  readonly minuteHandDeg = signal<number>(0);
-  readonly hourHandDeg = signal<number>(0);
+export class ClockComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
 
-  private timerId: any;
+  readonly currentTime = signal<Date>(new Date());
+  readonly hours = signal<string>('00');
+  readonly minutes = signal<string>('00');
+  readonly seconds = signal<string>('00');
+  readonly period = signal<'AM' | 'PM'>('AM');
+
+  // Sinal formatado para o texto rotacionado no topo (ex: "8:00 | AM")
+  readonly formattedTime = signal<string>('8:00 | AM');
+
+  // Graus de rotação para cada ponteiro
+  readonly hourDegrees = signal<number>(0);
+  readonly minuteDegrees = signal<number>(0);
+  readonly secondDegrees = signal<number>(0);
 
   ngOnInit(): void {
-    this.updateClock();
-    this.timerId = setInterval(() => this.updateClock(), 1000);
-  }
-
-  ngOnDestroy(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-    }
+    timer(0, 1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.updateClock());
   }
 
   private updateClock(): void {
     const now = new Date();
     this.currentTime.set(now);
 
-    const seconds = now.getSeconds();
-    const minutes = now.getMinutes();
-    const hours = now.getHours();
+    const rawHours = now.getHours();
+    const rawMinutes = now.getMinutes();
+    const rawSeconds = now.getSeconds();
 
-    this.secondHandDeg.set(seconds * 6);
-    this.minuteHandDeg.set((minutes + seconds / 60) * 6);
-    this.hourHandDeg.set(((hours % 12) + minutes / 60) * 30);
+    // Formatação Digital (ex: "8:00 | AM")
+    const periodValue = rawHours >= 12 ? 'PM' : 'AM';
+    const displayHour12 = rawHours % 12 === 0 ? 12 : rawHours % 12;
+    const formattedMin = rawMinutes.toString().padStart(2, '0');
+    const formattedSec = rawSeconds.toString().padStart(2, '0');
+
+    this.hours.set(rawHours.toString().padStart(2, '0'));
+    this.minutes.set(formattedMin);
+    this.seconds.set(formattedSec);
+    this.period.set(periodValue);
+
+    this.formattedTime.set(`${displayHour12}:${formattedMin} | ${periodValue}`);
+
+    // Cálculo dos Ângulos em Graus
+    const secDeg = rawSeconds * 6;
+    const minDeg = (rawMinutes + rawSeconds / 60) * 6;
+    const hrDeg = ((rawHours % 12) + rawMinutes / 60 + rawSeconds / 3600) * 30;
+
+    this.secondDegrees.set(secDeg);
+    this.minuteDegrees.set(minDeg);
+    this.hourDegrees.set(hrDeg);
   }
 }

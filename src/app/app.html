@@ -1,25 +1,8 @@
-<div class="app-layout">
-  <header class="app-header">
-    <h1>Calendar App</h1>
-    <div class="header-actions">
-      <app-color-picker></app-color-picker>
-    </div>
-  </header>
+<div class="dashboard-container">
+  <aside class="left-sidebar">
+    <app-clock></app-clock>
+  </aside>
 
-  <main class="app-content">
-    <aside class="sidebar font-section">
-      <app-clock></app-clock>
-      <app-weather-widget></app-weather-widget>
-    </aside>
-
-    <section class="main-section">
-      <app-calendar></app-calendar>
-    </section>
+  <main class="main-content">
   </main>
-
-  <footer class="app-footer">
-    <app-mascot></app-mascot>
-  </footer>
 </div>
-
-<router-outlet></router-outlet>
