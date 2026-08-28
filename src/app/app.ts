@@ -3,6 +3,7 @@ import { ClockComponent } from './features/clock/clock.component';
 import { WeatherWidgetComponent } from './features/weather-widget/weather-widget.component';
 import { CommonModule } from '@angular/common';
 import { SeasonComponent } from "./features/season/season.component";
+import { ColorPickerComponent } from "./shared/components/color-picker/color-picker.component";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { SeasonComponent } from "./features/season/season.component";
     CommonModule,
     ClockComponent,
     WeatherWidgetComponent,
-    SeasonComponent
+    SeasonComponent,
+    ColorPickerComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

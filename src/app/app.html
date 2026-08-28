@@ -1,10 +1,21 @@
-<div class="dashboard-container">
-  <aside class="left-sidebar">
-    <app-clock></app-clock>
-    <app-weather-widget class="weather-wrapper"></app-weather-widget>
-    <app-season class="season-wrapper"></app-season>
-  </aside>
+<div class="app-background">
+  <!-- Ambient Glow -->
+  <div class="ambient-glow glow-top-right"></div>
+  <div class="ambient-glow glow-bottom-left"></div>
 
-  <main class="main-content">
-  </main>
+  <!-- Main -->
+  <div class="dashboard-container">
+    <aside class="left-sidebar">
+      <app-clock></app-clock>
+      <app-weather-widget class="weather-wrapper"></app-weather-widget>
+      <app-season class="season-wrapper"></app-season>
+    </aside>
+
+    <main class="main-content">
+      <!-- Calendar -->
+    </main>
+  </div>
+
+  <app-color-picker></app-color-picker>
+
 </div>

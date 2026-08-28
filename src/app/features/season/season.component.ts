@@ -24,12 +24,12 @@ interface SeasonInfo {
       align-items: center;
       gap: 12px;
       padding-left: 12px;
-      color: #4a4a4a; /* Cor cinza escuro padronizada com a letra */
+      color: #4a4a4a;
     }
 
     .season-icon {
       font-size: 28px;
-      color: inherit; /* Garante que o ícone tenha a mesma cor do texto */
+      color: inherit;
     }
 
     .season-text {
@@ -45,14 +45,8 @@ export class SeasonComponent {
 
     readonly season = computed<SeasonInfo>(() => {
         const date = this.currentDate();
-        const month = date.getMonth(); // 0 = Jan, 11 = Dez
+        const month = date.getMonth();
         const day = date.getDate();
-
-        // Cálculo das estações para o Hemisfério Sul
-        // Verão: 21 Dez - 20 Mar
-        // Outono: 21 Mar - 20 Jun
-        // Inverno: 21 Jun - 22 Set
-        // Primavera: 23 Set - 20 Dez
 
         if ((month === 11 && day >= 21) || month === 0 || month === 1 || (month === 2 && day <= 20)) {
             return { name: 'SUMMER', icon: 'beach_access' };

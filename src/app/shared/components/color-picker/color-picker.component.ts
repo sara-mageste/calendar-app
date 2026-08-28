@@ -14,15 +14,28 @@ export class ColorPickerComponent {
   private readonly themeService = inject(ThemeService);
 
   readonly isOpen = signal<boolean>(false);
+  readonly isClosing = signal<boolean>(false);
   readonly availableColors = this.themeService.availableColors;
   readonly currentTheme = this.themeService.currentTheme;
 
   togglePopover(): void {
-    this.isOpen.update(open => !open);
+    if (this.isOpen()) {
+      this.closePopover();
+    } else {
+      this.isOpen.set(true);
+    }
   }
 
   selectColor(color: ColorOption): void {
     this.themeService.setColor(color);
-    this.isOpen.set(false);
+    this.closePopover();
+  }
+
+  private closePopover(): void {
+    this.isClosing.set(true);
+    setTimeout(() => {
+      this.isOpen.set(false);
+      this.isClosing.set(false);
+    }, 200);
   }
 }

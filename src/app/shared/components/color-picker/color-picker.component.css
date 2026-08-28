@@ -1,45 +1,53 @@
 .color-picker-wrapper {
-  position: relative;
-  display: inline-block;
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
 }
 
 .trigger-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 8px;
+  border-radius: 50%;
+  color: #4a5568;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
 }
 
 .trigger-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transform: scale(1.15) rotate(12deg);
+  color: #1a202c;
 }
 
 .popover-panel {
   position: absolute;
-  top: 50px;
-  right: 0;
-  background: rgba(30, 41, 59, 0.95);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
+  bottom: 52px;
+  left: 0;
+  background: #eef2f5;
+  border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  width: 220px;
+  box-shadow:
+    8px 8px 20px rgba(163, 177, 198, 0.4);
+  width: 200px;
+  animation: popIn 0.2s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.popover-panel.fade-out {
+  animation: popOut 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 .popover-panel h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   margin-bottom: 12px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #6b778c;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
 .color-options-grid {
@@ -49,15 +57,15 @@
 }
 
 .color-option-btn {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: 2px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .color-option-btn:hover {
@@ -65,12 +73,35 @@
 }
 
 .color-option-btn.selected {
-  border-color: #ffffff;
+  border-color: #2b2b2b;
 }
 
 .check-mark {
   color: #ffffff;
+  font-size: 0.75rem;
   font-weight: bold;
-  font-size: 0.85rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
 }
