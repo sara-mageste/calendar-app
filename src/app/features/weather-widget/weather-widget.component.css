@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
+  left: -9px;
 }
 
 .weather-summary-pill {
@@ -10,6 +11,7 @@
   align-items: center;
   gap: 12px;
   padding: 10px 22px;
+  min-width: 230px;
   border-radius: 40px;
   background: #eef2f5;
   border: none;
@@ -66,6 +68,7 @@
 .forecast-panel {
   position: absolute;
   left: calc(100% + 20px);
+  width: 380px;
   padding: 20px 28px;
   border-radius: 28px;
   background: #eef2f5;
@@ -80,6 +83,10 @@
   animation: fadeIn 0.25s ease-in-out;
 }
 
+.forecast-panel.fade-out {
+  animation: fadeOut 0.25s ease-in-out forwards;
+}
+
 .forecast-header {
   font-size: 0.7rem;
   font-weight: 700;
@@ -90,6 +97,22 @@
 .forecast-list {
   display: flex;
   gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+}
+
+.forecast-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.forecast-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.forecast-list::-webkit-scrollbar-thumb {
+  background: #c2c9d6;
+  border-radius: 10px;
 }
 
 .forecast-item {
@@ -97,12 +120,14 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .forecast-time {
   font-size: 0.75rem;
   font-weight: 600;
   color: #7a869a;
+  white-space: nowrap;
 }
 
 .forecast-icon {
@@ -110,7 +135,7 @@
 }
 
 .forecast-temp {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #2b2b2b;
 }
@@ -125,4 +150,17 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-10px);
+  }
+
 }
