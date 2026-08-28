@@ -1,0 +1,15 @@
+<div class="clock-container">
+  <div class="analog-clock">
+    <div class="clock-face">
+      <div class="hand hour-hand" [style.transform]="'rotate(' + hourHandDeg() + 'deg)'"></div>
+      <div class="hand minute-hand" [style.transform]="'rotate(' + minuteHandDeg() + 'deg)'"></div>
+      <div class="hand second-hand" [style.transform]="'rotate(' + secondHandDeg() + 'deg)'"></div>
+      <div class="center-pin"></div>
+    </div>
+  </div>
+
+  <div class="digital-clock">
+    <span class="digital-time">{{ currentTime() | date:'HH:mm:ss' }}</span>
+    <span class="digital-date">{{ currentTime() | date:'EEEE, d MMMM yyyy' }}</span>
+  </div>
+</div>

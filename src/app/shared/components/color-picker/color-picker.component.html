@@ -1,0 +1,26 @@
+<div class="color-picker-wrapper">
+  <button
+    class="trigger-btn"
+    (click)="togglePopover()"
+    [style.background]="currentTheme().selectedColor.gradient"
+    title="Seletor de Cores"
+  >
+    <span class="btn-icon">🎨</span>
+  </button>
+
+  <div class="popover-panel" *ngIf="isOpen()">
+    <h4>Escolha um Tema</h4>
+    <div class="color-options-grid">
+      <button
+        *ngFor="let color of availableColors()"
+        class="color-option-btn"
+        [class.selected]="color.id === currentTheme().selectedColor.id"
+        [style.background]="color.gradient"
+        (click)="selectColor(color)"
+        [title]="color.name"
+      >
+        <span class="check-mark" *ngIf="color.id === currentTheme().selectedColor.id">✓</span>
+      </button>
+    </div>
+  </div>
+</div>

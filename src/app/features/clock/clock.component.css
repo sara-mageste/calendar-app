@@ -1,0 +1,83 @@
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+.analog-clock {
+  width: 160px;
+  height: 160px;
+}
+
+.clock-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 40px;
+  margin-left: -2px;
+  background-color: #ffffff;
+}
+
+.minute-hand {
+  width: 3px;
+  height: 60px;
+  margin-left: -1.5px;
+  background-color: #a855f7;
+}
+
+.second-hand {
+  width: 2px;
+  height: 70px;
+  margin-left: -1px;
+  background-color: #ec4899;
+}
+
+.center-pin {
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.digital-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digital-time {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.digital-date {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: capitalize;
+}

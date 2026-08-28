@@ -1,0 +1,28 @@
+<div class="weather-widget-container" *ngIf="currentWeather() as weather">
+  <div class="current-weather-section">
+    <div class="weather-main-info">
+      <span class="city-name">{{ weather.city }}</span>
+      <div class="temp-display">
+        <span class="weather-icon">{{ weather.icon }}</span>
+        <span class="temp-value">{{ weather.temperature }}°C</span>
+      </div>
+      <span class="weather-condition">{{ weather.condition }}</span>
+    </div>
+    <div class="weather-details">
+      <span>Max: {{ weather.high }}° | Min: {{ weather.low }}°</span>
+      <span>Umidade: {{ weather.humidity }}%</span>
+      <span>Vento: {{ weather.windSpeed }} km/h</span>
+    </div>
+  </div>
+
+  <div class="hourly-forecast-section">
+    <h3>Previsão para 24 Horas</h3>
+    <div class="hourly-scroll">
+      <div *ngFor="let hour of hourlyForecast()" class="hourly-card">
+        <span class="hour-time">{{ hour.time }}</span>
+        <span class="hour-icon">{{ hour.icon }}</span>
+        <span class="hour-temp">{{ hour.temp }}°C</span>
+      </div>
+    </div>
+  </div>
+</div>

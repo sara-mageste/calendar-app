@@ -1,0 +1,20 @@
+<div class="calendar-container">
+  <header class="calendar-header">
+    <div class="month-year-selector">
+      <h2>{{ months[selectedMonth()] }} {{ selectedYear() }}</h2>
+    </div>
+    <div class="calendar-actions">
+      <button class="btn" (click)="prevMonth()" aria-label="Mês anterior">&lt;</button>
+      <button class="btn btn-today" (click)="goToToday()">Hoje</button>
+      <button class="btn" (click)="nextMonth()" aria-label="Próximo mês">&gt;</button>
+    </div>
+  </header>
+
+  <div class="calendar-grid-header">
+    <div *ngFor="let day of weekDays" class="weekday-cell">{{ day }}</div>
+  </div>
+
+  <div class="calendar-grid">
+    <!-- Grade de dias do calendário -->
+  </div>
+</div>
