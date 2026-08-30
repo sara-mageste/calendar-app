@@ -1,23 +1,18 @@
 :root {
-  /* Cores Principais */
   --bg-color: #f0f0f3;
   --text-primary: #333333;
   --text-secondary: #777777;
   --accent-yellow: #fcd34d;
   --accent-dynamic: #26c8f;
-  /* Cor inicial selecionável pelo usuário */
 
-  /* Sombras Neumorfistas (Luz no topo-esquerdo, Sombra no canto inferior-direito) */
   --shadow-light: #ffffff;
   --shadow-dark: rgba(163, 177, 198, 0.4);
 
-  /* Fontes e Raios de Borda */
   --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --radius-card: 24px;
   --radius-pill: 50px;
 }
 
-/* Reset Global de Margens e Caixa */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,9 +30,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Classes Utilitárias Neumorfistas */
-
-/* Card Saliente (Efeito 3D para fora) */
 .neumorphic-card {
   background: var(--bg-color);
   border-radius: var(--radius-card);
@@ -46,7 +38,6 @@ body {
     6px 6px 14px var(--shadow-dark);
 }
 
-/* Container Inset / Pressionado (Efeito 3D para dentro) */
 .neumorphic-inset {
   background: var(--bg-color);
   border-radius: var(--radius-pill);

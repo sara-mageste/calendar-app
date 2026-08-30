@@ -42,7 +42,7 @@ export class ThemeService {
 
   readonly currentTheme = signal<ThemeConfig>({
     selectedColor: this.availableColors()[0],
-    selectedBackground: { id: 'default', name: 'Default', type: 'solid', color: '#eef2f5' },
+    selectedBackground: { id: 'default', name: 'Default', type: 'gradient', color: '#eef2f5' },
     isDarkMode: false
   });
 

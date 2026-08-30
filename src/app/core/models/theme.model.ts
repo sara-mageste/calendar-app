@@ -10,7 +10,7 @@ export interface ColorOption {
 export interface BackgroundOption {
   id: string;
   name: string;
-  type: 'image' | 'gradient' | 'solid';
+  type: 'gradient';
   url?: string;
   gradient?: string;
   color?: string;

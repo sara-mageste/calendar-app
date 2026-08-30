@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HolidayService } from '../../core/services/holiday.service';
-import { MoonService } from '../../core/services/moon.service';
+import { CalendarService } from '../../core/services/calendar.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,40 +10,75 @@ import { MoonService } from '../../core/services/moon.service';
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent {
-  private readonly holidayService = inject(HolidayService);
-  private readonly moonService = inject(MoonService);
+  readonly calendarService = inject(CalendarService);
 
-  readonly currentDate = signal<Date>(new Date());
-  readonly selectedMonth = signal<number>(new Date().getMonth());
-  readonly selectedYear = signal<number>(new Date().getFullYear());
+  readonly isMonthDropdownOpen = signal(false);
+  readonly isMonthDropdownClosing = signal(false);
 
-  readonly weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-  readonly months = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-  ];
+  readonly isYearDropdownOpen = signal(false);
+  readonly isYearDropdownClosing = signal(false);
 
-  prevMonth(): void {
-    if (this.selectedMonth() === 0) {
-      this.selectedMonth.set(11);
-      this.selectedYear.update(y => y - 1);
+  readonly weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+  toggleMonthDropdown(): void {
+    if (this.isMonthDropdownOpen()) {
+      this.closeMonthDropdown();
     } else {
-      this.selectedMonth.update(m => m - 1);
+      this.closeYearDropdownImmediately();
+      this.isMonthDropdownOpen.set(true);
     }
   }
 
-  nextMonth(): void {
-    if (this.selectedMonth() === 11) {
-      this.selectedMonth.set(0);
-      this.selectedYear.update(y => y + 1);
-    } else {
-      this.selectedMonth.update(m => m + 1);
+  closeMonthDropdown(): void {
+    if (this.isMonthDropdownOpen() && !this.isMonthDropdownClosing()) {
+      this.isMonthDropdownClosing.set(true);
+      setTimeout(() => {
+        this.isMonthDropdownOpen.set(false);
+        this.isMonthDropdownClosing.set(false);
+      }, 200);
     }
   }
 
-  goToToday(): void {
-    const today = new Date();
-    this.selectedMonth.set(today.getMonth());
-    this.selectedYear.set(today.getFullYear());
+  private closeMonthDropdownImmediately(): void {
+    this.isMonthDropdownOpen.set(false);
+    this.isMonthDropdownClosing.set(false);
+  }
+
+  toggleYearDropdown(): void {
+    if (this.isYearDropdownOpen()) {
+      this.closeYearDropdown();
+    } else {
+      this.closeMonthDropdownImmediately();
+      this.isYearDropdownOpen.set(true);
+    }
+  }
+
+  closeYearDropdown(): void {
+    if (this.isYearDropdownOpen() && !this.isYearDropdownClosing()) {
+      this.isYearDropdownClosing.set(true);
+      setTimeout(() => {
+        this.isYearDropdownOpen.set(false);
+        this.isYearDropdownClosing.set(false);
+      }, 200);
+    }
+  }
+
+  private closeYearDropdownImmediately(): void {
+    this.isYearDropdownOpen.set(false);
+    this.isYearDropdownClosing.set(false);
+  }
+
+  selectMonth(index: number): void {
+    this.calendarService.setMonth(index);
+    this.closeMonthDropdown();
+  }
+
+  selectYear(year: number): void {
+    this.calendarService.setYear(year);
+    this.closeYearDropdown();
+  }
+
+  formatDayNumber(day: number): string {
+    return day < 10 ? `0${day}` : `${day}`;
   }
 }

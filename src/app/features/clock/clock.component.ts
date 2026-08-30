@@ -19,10 +19,8 @@ export class ClockComponent implements OnInit {
   readonly seconds = signal<string>('00');
   readonly period = signal<'AM' | 'PM'>('AM');
 
-  // Sinal formatado para o texto rotacionado no topo (ex: "8:00 | AM")
   readonly formattedTime = signal<string>('8:00 | AM');
 
-  // Graus de rotação para cada ponteiro
   readonly hourDegrees = signal<number>(0);
   readonly minuteDegrees = signal<number>(0);
   readonly secondDegrees = signal<number>(0);
@@ -41,7 +39,6 @@ export class ClockComponent implements OnInit {
     const rawMinutes = now.getMinutes();
     const rawSeconds = now.getSeconds();
 
-    // Formatação Digital (ex: "8:00 | AM")
     const periodValue = rawHours >= 12 ? 'PM' : 'AM';
     const displayHour12 = rawHours % 12 === 0 ? 12 : rawHours % 12;
     const formattedMin = rawMinutes.toString().padStart(2, '0');
@@ -54,7 +51,6 @@ export class ClockComponent implements OnInit {
 
     this.formattedTime.set(`${displayHour12}:${formattedMin} | ${periodValue}`);
 
-    // Cálculo dos Ângulos em Graus
     const secDeg = rawSeconds * 6;
     const minDeg = (rawMinutes + rawSeconds / 60) * 6;
     const hrDeg = ((rawHours % 12) + rawMinutes / 60 + rawSeconds / 3600) * 30;

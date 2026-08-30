@@ -9,15 +9,16 @@
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(100px);
   opacity: 0.45;
   pointer-events: none;
   transition: background 0.5s ease-in-out;
+  z-index: 1;
 }
 
 .glow-top-right {
   top: -100px;
-  right: -50px;
+  right: -100px;
   width: 550px;
   height: 550px;
   background: radial-gradient(circle at 35% 35%, var(--primary-color, #facc15) 0%, var(--secondary-color, #ec4899) 75%);
@@ -51,6 +52,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   justify-content: flex-start;
 }
 

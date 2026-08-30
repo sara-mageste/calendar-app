@@ -4,7 +4,7 @@
   </button>
 
   <div class="popover-panel neumorphic-card" *ngIf="isOpen()" [class.fade-out]="isClosing()">
-    <h4>Escolha um Tema</h4>
+    <h4>Choose a theme</h4>
     <div class="color-options-grid">
       <button *ngFor="let color of availableColors()" class="color-option-btn"
         [class.selected]="color.id === currentTheme().selectedColor.id" [style.background]="color.gradient"
