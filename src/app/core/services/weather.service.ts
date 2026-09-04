@@ -11,9 +11,51 @@ export class WeatherService {
 
   readonly weatherData = signal<WeatherData | null>(null);
   readonly isLoading = signal<boolean>(false);
+  readonly currentLatitude = signal<number>(-23.5505);
+  readonly currentLongitude = signal<number>(-46.6333);
+
+  constructor() {
+    this.initWeatherWithGeolocation();
+  }
+
+  initWeatherWithGeolocation(): void {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          this.currentLatitude.set(lat);
+          this.currentLongitude.set(lon);
+
+          let cityName = 'Your Location';
+          try {
+            const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+            const addressRes: any = await firstValueFrom(this.http.get(nominatimUrl));
+            const addr = addressRes?.address;
+
+            if (addr) {
+              cityName = addr.city || addr.town || addr.village || addr.city_district || addr.state || 'Your Location';
+            }
+          } catch (err) {
+            console.error('Error fetching city name:', err);
+          }
+
+          this.fetchWeather(lat, lon, cityName);
+        },
+        () => {
+          // Fallback if geolocation is denied or unavailable
+          this.fetchWeather();
+        }
+      );
+    } else {
+      this.fetchWeather();
+    }
+  }
 
   async fetchWeather(lat = -23.5505, lon = -46.6333, cityName = 'São Paulo'): Promise<void> {
     this.isLoading.set(true);
+    this.currentLatitude.set(lat);
+    this.currentLongitude.set(lon);
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code&timezone=auto`;
       const res: any = await firstValueFrom(this.http.get(url));

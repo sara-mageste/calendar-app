@@ -1,16 +1,19 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WeatherService } from '../../core/services/weather.service';
 
 interface SeasonInfo {
-    name: string;
-    icon: string;
+  name: string;
+  icon: string;
 }
 
+type SeasonKey = 'SUMMER' | 'AUTUMN' | 'WINTER' | 'SPRING';
+
 @Component({
-    selector: 'app-season',
-    standalone: true,
-    imports: [CommonModule],
-    template: `
+  selector: 'app-season',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
     <div class="season-container">
       <span class="material-symbols-outlined season-icon">
         {{ season().icon }}
@@ -18,7 +21,7 @@ interface SeasonInfo {
       <span class="season-text">IT IS {{ season().name }}.</span>
     </div>
   `,
-    styles: [`
+  styles: [`
     .season-container {
       display: flex;
       align-items: center;
@@ -41,21 +44,66 @@ interface SeasonInfo {
   `]
 })
 export class SeasonComponent {
-    private readonly currentDate = signal(new Date());
+  private readonly weatherService = inject(WeatherService);
+  private readonly currentDate = signal(new Date());
 
-    readonly season = computed<SeasonInfo>(() => {
-        const date = this.currentDate();
-        const month = date.getMonth();
-        const day = date.getDate();
+  readonly season = computed<SeasonInfo>(() => {
+    const date = this.currentDate();
+    const lat = this.weatherService.currentLatitude();
+    const lon = this.weatherService.currentLongitude();
+    const seasonKey = this.calculateSeason(date, lat, lon);
 
-        if ((month === 11 && day >= 21) || month === 0 || month === 1 || (month === 2 && day <= 20)) {
-            return { name: 'SUMMER', icon: 'beach_access' };
-        } else if ((month === 2 && day >= 21) || month === 3 || month === 4 || (month === 5 && day <= 20)) {
-            return { name: 'AUTUMN', icon: 'spa' };
-        } else if ((month === 5 && day >= 21) || month === 6 || month === 7 || (month === 8 && day <= 22)) {
-            return { name: 'WINTER', icon: 'snowflake' };
-        } else {
-            return { name: 'SPRING', icon: 'local_florist' };
-        }
-    });
+    const seasonDetails: Record<SeasonKey, SeasonInfo> = {
+      SUMMER: { name: 'SUMMER', icon: 'beach_access' },
+      AUTUMN: { name: 'AUTUMN', icon: 'spa' },
+      WINTER: { name: 'WINTER', icon: 'snowflake' },
+      SPRING: { name: 'SPRING', icon: 'local_florist' },
+    };
+
+    return seasonDetails[seasonKey];
+  });
+
+  private calculateSeason(date: Date, latitude: number, longitude: number): SeasonKey {
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    // Southern Hemisphere
+    if (latitude < 0) {
+      if ((month === 2 && day >= 21) || month === 3 || month === 4 || (month === 5 && day <= 20)) {
+        return 'AUTUMN';
+      } else if ((month === 5 && day >= 21) || month === 6 || month === 7 || (month === 8 && day <= 22)) {
+        return 'WINTER';
+      } else if ((month === 8 && day >= 23) || month === 9 || month === 10 || (month === 11 && day <= 20)) {
+        return 'SPRING';
+      } else {
+        return 'SUMMER';
+      }
+    }
+
+    // East Asia
+    const isEastAsiaMeteorological = latitude >= 15 && latitude <= 55 && longitude >= 100 && longitude <= 155;
+
+    if (isEastAsiaMeteorological) {
+      if (month >= 2 && month <= 4) {
+        return 'SPRING';
+      } else if (month >= 5 && month <= 7) {
+        return 'SUMMER';
+      } else if (month >= 8 && month <= 10) {
+        return 'AUTUMN';
+      } else {
+        return 'WINTER';
+      }
+    }
+
+    // Western Northern Hemisphere
+    if ((month === 2 && day >= 21) || month === 3 || month === 4 || (month === 5 && day <= 20)) {
+      return 'SPRING';
+    } else if ((month === 5 && day >= 21) || month === 6 || month === 7 || (month === 8 && day <= 22)) {
+      return 'SUMMER';
+    } else if ((month === 8 && day >= 23) || month === 9 || month === 10 || (month === 11 && day <= 20)) {
+      return 'AUTUMN';
+    } else {
+      return 'WINTER';
+    }
+  }
 }
