@@ -19,48 +19,48 @@ export class MoonService {
     const currentPhaseDay = (diffDays % cycleDays + cycleDays) % cycleDays;
 
     let phase: MoonPhaseCategory = 'new';
-    let name = 'Lua Nova';
+    let name = 'New Moon';
     let icon = 'nightlight';
     let illumination = 0;
 
     if (currentPhaseDay < 1.84) {
       phase = 'new';
-      name = 'Lua Nova';
+      name = 'New Moon';
       icon = 'nightlight';
       illumination = 5;
     } else if (currentPhaseDay < 5.53) {
       phase = 'waxing_crescent';
-      name = 'Crescente Côncava';
+      name = 'Waxing Crescent';
       icon = 'dark_mode';
       illumination = 25;
     } else if (currentPhaseDay < 9.22) {
       phase = 'first_quarter';
-      name = 'Quarto Crescente';
+      name = 'First Quarter';
       icon = 'dark_mode';
       illumination = 50;
     } else if (currentPhaseDay < 12.91) {
       phase = 'waxing_gibbous';
-      name = 'Crescente Convexa';
+      name = 'Waxing Gibbous';
       icon = 'brightness_3';
       illumination = 75;
     } else if (currentPhaseDay < 16.61) {
       phase = 'full';
-      name = 'Lua Cheia';
+      name = 'Full Moon';
       icon = 'brightness_1';
       illumination = 100;
     } else if (currentPhaseDay < 20.30) {
       phase = 'waning_gibbous';
-      name = 'Minguante Convexa';
+      name = 'Waning Gibbous';
       icon = 'bedtime';
       illumination = 75;
     } else if (currentPhaseDay < 23.99) {
       phase = 'third_quarter';
-      name = 'Quarto Minguante';
+      name = 'Third Quarter';
       icon = 'bedtime';
       illumination = 50;
     } else {
       phase = 'waning_crescent';
-      name = 'Minguante Côncava';
+      name = 'Waning Crescent';
       icon = 'nightlight';
       illumination = 20;
     }
