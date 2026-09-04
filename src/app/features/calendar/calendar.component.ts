@@ -1,11 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarService } from '../../core/services/calendar.service';
+import { MoonPhaseComponent } from '../moon-phase/moon-phase.component';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MoonPhaseComponent],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })

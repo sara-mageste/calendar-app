@@ -1,0 +1,11 @@
+<div class="moon-container">
+    <div class="moon-icon-pill">
+        <span class="material-symbols-outlined moon-icon">
+            {{ moonService.currentPhase().icon }}
+        </span>
+    </div>
+    <div class="moon-info">
+        <span class="moon-label">LUA</span>
+        <span class="moon-phase-name">{{ moonService.currentPhase().name }}</span>
+    </div>
+</div>

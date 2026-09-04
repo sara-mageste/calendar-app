@@ -12,6 +12,6 @@ export interface MoonPhase {
   date: string;
   phase: MoonPhaseCategory;
   name: string;
-  illumination: number; // 0 to 100 percentage
+  illumination: number;
   icon: string;
 }
