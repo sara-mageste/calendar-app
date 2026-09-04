@@ -6,3 +6,10 @@ export interface CalendarDay {
     isHoliday: boolean;
     holidayName?: string;
 }
+
+export interface PublicHoliday {
+    date: string;
+    localName: string;
+    name: string;
+    countryCode: string;
+}

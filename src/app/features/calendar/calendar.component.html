@@ -7,14 +7,14 @@
 
       <div class="dropdown-container">
         <button class="neumorphic-pill" (click)="toggleMonthDropdown()" [class.active]="isMonthDropdownOpen()">
-          <span>{{ calendarService.months[calendarService.selectedDate().getMonth()] }}</span>
+          <span>{{ calendarService.months[calendarService.selectedMonth()] }}</span>
           <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
         </button>
 
         <div class="dropdown-menu neumorphic-card" *ngIf="isMonthDropdownOpen()"
           [class.fade-out]="isMonthDropdownClosing()">
           <button *ngFor="let month of calendarService.months; let i = index" class="dropdown-item"
-            [class.selected]="i === calendarService.selectedDate().getMonth()" (click)="selectMonth(i)">
+            [class.selected]="i === calendarService.selectedMonth()" (click)="selectMonth(i)">
             {{ month }}
           </button>
         </div>
@@ -22,14 +22,14 @@
 
       <div class="dropdown-container">
         <button class="neumorphic-pill" (click)="toggleYearDropdown()" [class.active]="isYearDropdownOpen()">
-          <span>{{ calendarService.selectedDate().getFullYear() }}</span>
+          <span>{{ calendarService.selectedYear() }}</span>
           <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
         </button>
 
         <div class="dropdown-menu neumorphic-card year-menu" *ngIf="isYearDropdownOpen()"
           [class.fade-out]="isYearDropdownClosing()">
           <button *ngFor="let year of calendarService.years" class="dropdown-item"
-            [class.selected]="year === calendarService.selectedDate().getFullYear()" (click)="selectYear(year)">
+            [class.selected]="year === calendarService.selectedYear()" (click)="selectYear(year)">
             {{ year }}
           </button>
         </div>
