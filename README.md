@@ -2,6 +2,8 @@
 
 **My Sunny Days** is a full-featured web application designed to keep you organized with an intuitive calendar, real-time weather information, moon phase tracking, and seasonal markers — all delivered through a sleek Neumorphic user interface.
 
+![My Sunny Days Demo](./public/demo.gif)
+
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
