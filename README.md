@@ -1,59 +1,67 @@
-# CalendarApp
+# ☀️ My Sunny Days
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
+**My Sunny Days** is a full-featured web application designed to keep you organized with an intuitive calendar, real-time weather information, moon phase tracking, and seasonal markers — all delivered through a sleek Neumorphic user interface.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
 
-To start a local development server, run:
+---
 
+## ✨ Features
+
+* **📅 Dynamic Location-Based Calendar**: Browse days, weeks, and months of any selected year. Automatically detects your location to fetch and display official local national holidays.
+* **🌤️ Weather Widget**: Real-time current temperature, weather conditions, and a 24-hour detailed forecast using geolocation data.
+* **🕒 Analog & Digital Clock**: Integrated analog clock display paired with a digital time indicator based on your system time.
+* **🌙 Moon Phase Tracking**: Accurate calculation and representation of the current lunar phase.
+* **🍂 Season Indicators**: Visual updates matching the current astronomical season.
+* **🎨 Customizable Neumorphic Theme**: Soft off-white aesthetic with custom dynamic gradient accents and customizable color schemes.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework**: Angular (Standalone Components, Signals, Reactive State)
+* **Language**: TypeScript
+* **Styling**: CSS3 with Neumorphism design patterns and CSS Variables
+* **Testing**: Vitest & Angular Testing Library (Unit Test Suite with 100% component pass rate)
+* **External APIs**:
+  * [Open-Meteo API](https://open-meteo.com/) — Weather forecast data
+  * [Nager.Date API](https://date.nager.at/) — Public national holiday data by country
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js (v18 or higher)
+* Angular CLI (`npm install -g @angular/cli`)
+
+### Installation & Local Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone [https://github.com/sara-mageste/calendar-app.git](https://github.com/sara-mageste/calendar-app.git)
+   cd calendar-app
+
+2. **Install dependencies**:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+3. **Run the development server:**:
 ```bash
-ng generate component component-name
+npm serve
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Navigate to http://localhost:4200/. The app will automatically reload if you change any source files.
 
+4. **Run Unit Tests**:
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
+## 👩‍💻 Author
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Developed with 🤍 by Sara Mageste.
