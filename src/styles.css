@@ -1,3 +1,21 @@
+@property --primary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #facc15;
+}
+
+@property --secondary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ec4899;
+}
+
+@property --accent-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #06b6d4;
+}
+
 :root {
   --bg-color: #f0f0f3;
   --text-primary: #333333;
@@ -11,6 +29,11 @@
   --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --radius-card: 24px;
   --radius-pill: 50px;
+
+  transition:
+    --primary-color 1s ease-in-out,
+    --secondary-color 1s ease-in-out,
+    --accent-color 1s ease-in-out;
 }
 
 * {
