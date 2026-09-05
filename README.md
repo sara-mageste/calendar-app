@@ -4,6 +4,9 @@
 
 ![My Sunny Days Demo](./public/demo.gif)
 
+🚀 **[Live Demo — View Application](https://mysunnydays.vercel.app)**
+
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
@@ -43,9 +46,11 @@
 ### Installation & Local Setup
 
 1. **Clone the repository**:
-   ```bash
-   git clone [https://github.com/sara-mageste/calendar-app.git](https://github.com/sara-mageste/calendar-app.git)
-   cd calendar-app
+```bash
+git clone [https://github.com/sara-mageste/calendar-app.git](https://github.com/sara-mageste/calendar-app.git)
+
+cd calendar-app
+```
 
 2. **Install dependencies**:
 ```bash
