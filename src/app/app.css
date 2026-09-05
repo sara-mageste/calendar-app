@@ -1,5 +1,8 @@
 .app-background {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   width: 100vw;
   background-color: #eef2f5;
@@ -36,8 +39,11 @@
   display: flex;
   width: 100vw;
   min-height: 100vh;
+  max-width: 1240px;
   background-color: #eef2f5;
   padding: 40px;
+  margin: 0 auto;
+  gap: 50px;
   box-sizing: border-box;
 }
 
@@ -52,8 +58,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .weather-wrapper {
